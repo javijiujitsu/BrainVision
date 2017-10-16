@@ -7,6 +7,9 @@ const bodyParser = require('body-parser');
 const exphbs  = require('express-handlebars');
 const mongoose = require('mongoose');
 const indexRoutes = require('./routes/index');
+const businessideasRoutes = require('./routes/businessideas');
+const aboutRoutes = require('./routes/about');
+
 
 const app = express();
 
@@ -39,7 +42,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Used Routes
+
 app.use('/', indexRoutes);
+app.use('/', businessideasRoutes);
+app.use('/', aboutRoutes);
+
 
 
 // catch 404 and forward to error handler
