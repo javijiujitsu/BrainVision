@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const Businessidea  = require('../models/Businessidea');
 
 
 //GET
@@ -16,17 +17,25 @@ router.post('/businessideas', (req, res)=>{
   if(!req.body.title){
     errors.push({text:'Please add a title'});
   }
-  if(!req.body.description){
-    errors.push({text:'Please add a description'});
+  if(!req.body.details){
+    errors.push({text:'Please add a details'});
   }
   if(errors.length > 0){
     res.render('businessideas/add', {
     errors: errors,
     title: req.body.title,
-    description: req.body.description
+    details: req.body.details
   });
   } else {
-  res.send('passed');
+  const newUser = {
+    title: req.body.title,
+    details: req.body.details
+  }
+  new Businessidea(newUser)
+  .save()
+  .then(businessidea => {
+      res.redirect('/businessideas');
+    })
   }
   });
 

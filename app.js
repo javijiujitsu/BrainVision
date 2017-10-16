@@ -6,24 +6,27 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const exphbs  = require('express-handlebars');
 const mongoose = require('mongoose');
+const session  = require('express-session');
+const MongoStore  = require('connect-mongo')(session);
 const indexRoutes = require('./routes/index');
 const businessideasRoutes = require('./routes/businessideas');
 const aboutRoutes = require('./routes/about');
-
+const Businessidea  = require('./models/Businessidea');
 
 const app = express();
+
 
 // Map global promise - get rid of warning
 mongoose.Promise = global.Promise;
 
+
 // Connect to mongoose
-mongoose.connect('mongodb://localhost/BrainVision', {useMongoClient: true})
+mongoose.connect('mongodb://localhost/brainvision', {useMongoClient: true})
 .then(() => console.log('MongoDB Connected...'))
 .catch(err => console.log(err));
 
-// Loading Businessidea model
 
-const Businessidea  = require('./models/Businessidea');
+
 
 
  //view engine setup
