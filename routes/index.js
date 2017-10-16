@@ -10,6 +10,8 @@ router.get('/about', (req, res)=>{
   res.render('about');
 });
 
-
+router.get('/businessideas/add', (req, res)=>{
+  res.render('businessideas/add');
+});
 
 module.exports = router;
